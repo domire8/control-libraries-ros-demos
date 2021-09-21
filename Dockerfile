@@ -1,4 +1,4 @@
-ARG ROS_VERSION
+ARG ROS_VERSION=noetic
 FROM ghcr.io/aica-technology/ros-ws:${ROS_VERSION}
 
 ARG BRANCH=develop
@@ -9,5 +9,5 @@ RUN sudo ldconfig
 RUN rm -rf /tmp/control_libraries/*
 
 WORKDIR /home/${USER}/ros_ws
-COPY --chown=${USER} ./ ./src/ros_examples
+COPY --chown=${USER} ./ros_examples ./src/ros_examples
 RUN su ${USER} -c /bin/bash -c "source /opt/ros/$ROS_DISTRO/setup.bash; catkin_make install"
