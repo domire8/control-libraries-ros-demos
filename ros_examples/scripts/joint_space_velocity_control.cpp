@@ -102,7 +102,7 @@ int main(int argc, char** argv) {
   }
 
   std::string robot_name = ros::this_node::getNamespace();
-  std::string urdf_path = std::string(SCRIPT_FIXTURES) + robot_name + ".urdf";
+  std::string urdf_path = "/tmp/" + robot_name + ".urdf";
   Model::create_urdf_from_string(robot_description, urdf_path);
   RobotInterface robot(&node_handle, robot_name, urdf_path);
 

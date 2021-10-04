@@ -57,8 +57,6 @@ set(DEMOS_SCRIPTS
     task_space_control
     joint_space_velocity_control
 )
-set(FIXTURE_INSTALL_PATH ${CMAKE_INSTALL_PREFIX}/fixtures/)
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/scripts/fixtures/ DESTINATION ${FIXTURE_INSTALL_PATH})
 
 foreach(SCRIPT ${DEMOS_SCRIPTS})
     add_executable(${SCRIPT} scripts/${SCRIPT}.cpp)
@@ -72,7 +70,6 @@ foreach(SCRIPT ${DEMOS_SCRIPTS})
         robot_model
         controllers
     )
-    target_compile_definitions(${SCRIPT} PRIVATE SCRIPT_FIXTURES="${FIXTURE_INSTALL_PATH}")
     install(TARGETS ${SCRIPT}
       RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
     )
