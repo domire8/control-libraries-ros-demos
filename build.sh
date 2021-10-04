@@ -11,9 +11,9 @@ while [ "$#" -gt 0 ]; do
     BUILD_FLAGS+=(--no-cache)
     shift 1
     ;;
-  -b|--branch)
-    BRANCH=$2
-    shift 2
+  -v|--verbose)
+    BUILD_FLAGS+=(--progress=plain)
+    shift 1
     ;;
   *)
     echo "Unknown option: $1" >&2
@@ -22,12 +22,9 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-docker pull ghcr.io/aica-technology/ros-ws:"${ROS_VERSION}"
-
-echo "Using control libraries branch ${BRANCH}"
+docker pull ghcr.io/aica-technology/ros-control-libraries:"${ROS_VERSION}"
 
 BUILD_FLAGS+=(--build-arg ROS_VERSION="${ROS_VERSION}")
-BUILD_FLAGS+=(--build-arg BRANCH="${BRANCH}")
 BUILD_FLAGS+=(-t "${IMAGE_NAME}")
 
 DOCKER_BUILDKIT=1 docker build "${BUILD_FLAGS[@]}" .
