@@ -56,6 +56,7 @@ include_directories(
 set(DEMOS_SCRIPTS
     task_space_control
     joint_space_velocity_control
+    cartesian_twist_control
 )
 
 foreach(SCRIPT ${DEMOS_SCRIPTS})

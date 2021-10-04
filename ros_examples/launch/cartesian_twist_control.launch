@@ -1,0 +1,11 @@
+<launch>
+    <arg name="robot_name" default=""/>
+
+    <group if="$(eval robot_name == '')">
+        <node type="cartesian_twist_control" name="cartesian_twist_control" pkg="ros_examples" output="screen"/>
+    </group>
+
+    <group unless="$(eval robot_name == '')">
+        <node ns="$(arg robot_name)" type="cartesian_twist_control" name="cartesian_twist_control" pkg="ros_examples" output="screen"/>
+    </group>
+</launch>
