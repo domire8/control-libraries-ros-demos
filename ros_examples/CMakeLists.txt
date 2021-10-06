@@ -15,6 +15,13 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+find_package(catkin REQUIRED COMPONENTS
+    roscpp
+    tf
+    std_msgs
+    sensor_msgs
+)
+
 list(APPEND CMAKE_PREFIX_PATH /opt/openrobots)
 find_package(Eigen3 REQUIRED)
 find_package(pinocchio REQUIRED)
@@ -25,13 +32,6 @@ find_library(state_representation REQUIRED)
 find_library(dynamical_systems REQUIRED)
 find_library(controllers REQUIRED)
 find_library(robot_model REQUIRED)
-
-find_package(catkin REQUIRED COMPONENTS
-    roscpp
-    tf
-    std_msgs
-    sensor_msgs
-)
 
 find_package(Boost REQUIRED COMPONENTS system)
 add_compile_definitions(BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS)
@@ -57,6 +57,7 @@ set(DEMOS_SCRIPTS
     task_space_control
     joint_space_velocity_control
     cartesian_twist_control
+    mobile_manipulator_control
 )
 
 foreach(SCRIPT ${DEMOS_SCRIPTS})

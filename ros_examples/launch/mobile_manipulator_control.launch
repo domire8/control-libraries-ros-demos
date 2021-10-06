@@ -1,0 +1,3 @@
+<launch>
+    <node type="mobile_manipulator_control" name="mobile_manipulator_control" pkg="ros_examples" output="screen"/>
+</launch>
