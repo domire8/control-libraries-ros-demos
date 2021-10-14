@@ -14,8 +14,7 @@ using namespace std::chrono_literals;
 
 std::function<void(int)> sigint_handler;
 
-void publish(const ros::Publisher& publisher, const JointVelocities& command) {
-  std::cout << command << std::endl;
+void publish(const ros::Publisher& publisher, const JointVelocities& command)
   std_msgs::Float64MultiArray msg;
   msg.data = command.to_std_vector();
   publisher.publish(msg);
