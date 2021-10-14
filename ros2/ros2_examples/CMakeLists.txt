@@ -30,7 +30,7 @@ find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
 include_directories(
-        include
+    include
     ${Eigen3_INCLUDE_DIRS}
     ${STATE_REPRESENTATION_INCLUDE_DIR}
     ${DYNAMICAL_SYSTEMS_INCLUDE_DIR}
@@ -65,4 +65,3 @@ ament_auto_package()
 
 install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
 install(DIRECTORY rviz DESTINATION share/${PROJECT_NAME})
-

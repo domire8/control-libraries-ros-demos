@@ -1,7 +1,7 @@
 #include <chrono>
+#include <dynamical_systems/Linear.hpp>
 #include <memory>
 #include <rclcpp/rclcpp.hpp>
-#include <dynamical_systems/Linear.hpp>
 
 #include "RobotInterfaceNode.h"
 
