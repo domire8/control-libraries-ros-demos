@@ -9,8 +9,8 @@
 
 ## Prerequisites
 
-This package contains the control loop examples in a ROS2 environment. The folder is a fully functional ROS2 package
-that can be directly copied in a ROS2 workspace.
+This package contains control loop examples in a ROS2 environment. The folder is a fully functional ROS2 package that
+can be directly copied in a ROS2 workspace.
 
 There is also a `Dockerfile` provided that encapsulates the whole package in a containerized ROS2 environment. If you
 want to run demo with the dockerized environment, you need to do the following first:
@@ -33,7 +33,7 @@ If working with Docker, build and run the image with
 aica-docker interactive control-libraries-ros-demos:galactic -u ros2 --net bridge
 ```
 
-Running the scripts uses ROS2 commands, e.g. to run the `task_space_control` script:
+Running the scripts uses ROS2 commands, e.g. to run a script:
 
 ```console
 ros2 launch ros2_examples demo.launch.py demo:=<demo>
@@ -58,7 +58,7 @@ aica-docker interactive aica-technology/ros2-simulator:galactic -u ros2 --net br
 ros2 launch pybullet_ros2 franka.launch.py
 ```
 
-Once the simulator is running (in this case the franka simulator), do either
+Once the simulator is running (in this case the franka simulator), do
 
 ```console
 ros2 launch ros2_examples demo.launch.py demo:=<demo> robot_name:=franka
