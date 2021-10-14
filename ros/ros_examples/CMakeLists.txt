@@ -21,6 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
     sensor_msgs
 )
 
+list(APPEND CMAKE_PREFIX_PATH /opt/openrobots)
 find_package(Eigen3 REQUIRED)
 find_package(pinocchio REQUIRED)
 find_package(OsqpEigen REQUIRED)
