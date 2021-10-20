@@ -30,7 +30,7 @@ If working with Docker, build and run the image with
 
 ```console
 ./build-server.sh
-aica-docker interactive control-libraries-ros-demos:noetic -u ros --net bridge
+aica-docker interactive control-libraries-ros-demos:noetic -u ros --net host --no-hostname
 ```
 
 Running the scripts uses ROS commands, e.g. to run a script:
@@ -49,16 +49,14 @@ Available demos are:
 
 The scripts require a simulator (or real robot with the same interface) to be running. Start the simulator with:
 
-TODO!!!!
 ```console
 cd path/to/desired/location
 git clone -b develop git@github.com:epfl-lasa/simulator-backend.git
 cd simulator-backend/pybullet_ros
 ./build-server.sh
-aica-docker interactive aica-technology/ros-simulator:noetic -u ros --net bridge
+aica-docker interactive aica-technology/ros-simulator:noetic -u ros --net host --no-hostname
 roslaunch pybullet_ros franka.launch
 ```
-TODO!!!!
 
 Once the simulator is running (in this case the franka simulator), do
 
