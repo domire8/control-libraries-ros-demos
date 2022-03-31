@@ -10,12 +10,14 @@ class JointSpaceVelocityControl(RobotInterfaceNode):
         super().__init__(node_name, "joint_states", "velocity_controller/command")
         robot_name = self.get_parameter("robot_name").get_parameter_value().string_value
         self.init_robot_model(robot_name)
+
         target = sr.CartesianPose(self.robot.get_frames()[-1], self.robot.get_frames()[0])
         target.set_position([0.6, -0.3, 0.5])
         target.set_orientation([0, 1, 0, 0])
         self._ds = create_cartesian_ds(DYNAMICAL_SYSTEM.POINT_ATTRACTOR)
         self._ds.set_parameter_value("attractor", target, sr.StateType.PARAMETER_CARTESIANPOSE)
         self._ds.set_parameter_value("gain", [50, 50, 50, 10, 10, 10], sr.StateType.PARAMETER_DOUBLE_ARRAY)
+
         self._timer = self.create_timer(dt, self.control_loop)
 
     def control_loop(self):

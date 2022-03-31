@@ -33,7 +33,7 @@ If working with Docker, build and run the image with
 aica-docker interactive control-libraries-ros-demos:galactic -u ros2 --net bridge
 ```
 
-Running the scripts uses ROS2 commands, e.g. to run a script:
+Running the cpp scripts uses ROS2 commands, e.g. to run a script:
 
 ```console
 ros2 launch ros2_examples demo.launch.py demo:=<demo>
@@ -43,6 +43,17 @@ Available demos are:
 
 - cartesian_twist_control
 - joint_space_position_control
+- joint_space_velocity_control
+
+
+Running the python scripts uses ROS2 commands, e.g. to run a script:
+
+```console
+ros2 launch ros2_examples py_demo.launch.py demo:=<demo>
+```
+
+Available demos are:
+
 - joint_space_velocity_control
 
 ## Running the simulator simultaneously

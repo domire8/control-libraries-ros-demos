@@ -4,7 +4,7 @@ from launch.substitutions import LaunchConfiguration, TextSubstitution
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    demo = DeclareLaunchArgument('demo', default_value=TextSubstitution(text='joint_space_impedance_control_py'))
+    demo = DeclareLaunchArgument('demo', default_value=TextSubstitution(text='joint_space_velocity_control'))
     robot_name = DeclareLaunchArgument('robot_name', default_value=TextSubstitution(text='franka'))
 
     return LaunchDescription([
