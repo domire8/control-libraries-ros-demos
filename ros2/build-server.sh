@@ -1,5 +1,5 @@
 #!/bin/bash
-ROS_VERSION=galactic
+ROS_VERSION=galactic-devel
 
 IMAGE_NAME=control-libraries-ros-demos
 BRANCH=develop
