@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.15)
 project(ros2_examples)
 
 # Default to C99
@@ -60,6 +60,9 @@ foreach(SCRIPT ${DEMOS_SCRIPTS})
     )
     target_compile_definitions(${SCRIPT} PRIVATE SCRIPT_FIXTURES="${FIXTURE_INSTALL_PATH}")
 endforeach()
+
+# Install Python modules
+ament_python_install_package(${PROJECT_NAME} SCRIPTS_DESTINATION lib/${PROJECT_NAME})
 
 ament_auto_package()
 
