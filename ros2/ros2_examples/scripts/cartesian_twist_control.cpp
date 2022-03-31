@@ -1,6 +1,6 @@
-#include <controllers/impedance/CartesianTwistController.hpp>
+#include <controllers/ControllerFactory.hpp>
 #include <chrono>
-#include <dynamical_systems/Linear.hpp>
+#include <dynamical_systems/DynamicalSystemFactory.hpp>
 #include <memory>
 #include <rclcpp/rclcpp.hpp>
 
@@ -16,8 +16,8 @@ class CartesianTwistControl : public ros2_examples::RobotInterfaceNode {
 private:
   std::chrono::nanoseconds dt_;
 
-  std::shared_ptr<dynamical_systems::Linear<CartesianState>> ds_;
-  std::shared_ptr<controllers::impedance::CartesianTwistController> ctrl_;
+  std::shared_ptr<dynamical_systems::IDynamicalSystem<CartesianState>> ds_;
+  std::shared_ptr<controllers::IController<CartesianState>> ctrl_;
 
   rclcpp::TimerBase::SharedPtr timer_;
 
@@ -31,12 +31,20 @@ public:
     CartesianPose target(this->robot->get_frames().back(), this->robot->get_frames().front());
     target.set_position(.3, .4, .5);
     target.set_orientation(Eigen::Quaterniond(0, 1, 0, 0));
-    std::vector<double> gains = {50.0, 50.0, 50.0, 10.0, 10.0, 10.0};
-    this->ds_ = std::make_shared<dynamical_systems::Linear<CartesianState>>(target, gains);
+    this->ds_ = dynamical_systems::DynamicalSystemFactory<CartesianState>::create_dynamical_system(
+        dynamical_systems::DynamicalSystemFactory<CartesianState>::DYNAMICAL_SYSTEM::POINT_ATTRACTOR
+    );
+    this->ds_->set_parameter_value("attractor", target);
+    this->ds_->set_parameter_value("gain", std::vector<double>{50.0, 50.0, 50.0, 10.0, 10.0, 10.0});
 
-    this->ctrl_ = std::make_shared<controllers::impedance::CartesianTwistController>(1, 1, .5, .5);
+    this->ctrl_ =
+        controllers::CartesianControllerFactory::create_controller(controllers::CONTROLLER_TYPE::COMPLIANT_TWIST, *this->robot);
+    this->ctrl_->set_parameter_value("linear_principle_damping", 1.);
+    this->ctrl_->set_parameter_value("linear_orthogonal_damping", 1.);
+    this->ctrl_->set_parameter_value("angular_stiffness", .5);
+    this->ctrl_->set_parameter_value("angular_damping", .5);
 
-    this->timer_ = this->create_wall_timer(dt_, std::bind(&CartesianTwistControl::run, this));
+    this->timer_ = this->create_wall_timer(dt_, [this] { run(); });
   }
 
   void run() {
@@ -45,7 +53,7 @@ public:
       CartesianTwist twist = this->ds_->evaluate(eef_pose);
       twist.clamp(1.5, 0.5);
       JointTorques
-          command = this->ctrl_->compute_command(twist, eef_pose, this->robot->compute_jacobian(this->joint_state));
+          command = this->ctrl_->compute_command(twist, eef_pose, this->joint_state);
       this->publish(command);
     }
   }
