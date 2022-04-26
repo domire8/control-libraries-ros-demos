@@ -30,8 +30,8 @@ public:
     CartesianPose target(this->robot->get_frames().back(), this->robot->get_frames().front());
     target.set_position(.6, -0.3, .5);
     target.set_orientation(Eigen::Quaterniond(0, 1, 0, 0));
-    this->ds_ = dynamical_systems::DynamicalSystemFactory<CartesianState>::create_dynamical_system(
-        dynamical_systems::DynamicalSystemFactory<CartesianState>::DYNAMICAL_SYSTEM::POINT_ATTRACTOR
+    this->ds_ = dynamical_systems::CartesianDynamicalSystemFactory::create_dynamical_system(
+        dynamical_systems::DYNAMICAL_SYSTEM_TYPE::POINT_ATTRACTOR
     );
     this->ds_->set_parameter_value("attractor", target);
     this->ds_->set_parameter_value("gain", std::vector<double>{50.0, 50.0, 50.0, 10.0, 10.0, 10.0});
