@@ -1,7 +1,7 @@
-#include <controllers/impedance/CartesianTwistController.hpp>
+#include <controllers/ControllerFactory.hpp>
 #include <chrono>
 #include <csignal>
-#include <dynamical_systems/Linear.hpp>
+#include <dynamical_systems/DynamicalSystemFactory.hpp>
 #include <robot_model/Model.hpp>
 #include <ros/ros.h>
 #include <std_msgs/Float64MultiArray.h>
@@ -9,8 +9,6 @@
 #include "RobotInterface.h"
 
 using namespace state_representation;
-using namespace controllers::impedance;
-using namespace dynamical_systems;
 using namespace robot_model;
 using namespace std::chrono_literals;
 
@@ -27,18 +25,26 @@ void control_loop(ros_examples::RobotInterface& robot, const int& freq) {
   CartesianPose target(robot.get_robot_frames().back(), robot.get_robot_frames().front());
   target.set_position(.3, .4, .5);
   target.set_orientation(Eigen::Quaterniond(0, 1, 0, 0));
-  std::vector<double> gains = {50.0, 50.0, 50.0, 10.0, 10.0, 10.0};
-  Linear<CartesianState> linear_ds(target, gains);
 
-  CartesianTwistController ctrl(1, 1, .5, .5);
+  auto ds = dynamical_systems::CartesianDynamicalSystemFactory::create_dynamical_system(
+      dynamical_systems::DYNAMICAL_SYSTEM_TYPE::POINT_ATTRACTOR
+  );
+  ds->set_parameter_value("attractor", target);
+  ds->set_parameter_value("gain", std::vector < double > {50.0, 50.0, 50.0, 10.0, 10.0, 10.0});
+
+  auto ctrl = controllers::CartesianControllerFactory::create_controller(controllers::CONTROLLER_TYPE::COMPLIANT_TWIST);
+  ctrl->set_parameter_value("linear_principle_damping", 1.);
+  ctrl->set_parameter_value("linear_orthogonal_damping", 1.);
+  ctrl->set_parameter_value("angular_stiffness", .5);
+  ctrl->set_parameter_value("angular_damping", .5);
 
   ros::Rate rate(freq);
   while (ros::ok()) {
     if (robot.state_received) {
       CartesianPose eef_pose = robot.get_eef_pose();
-      CartesianTwist twist = linear_ds.evaluate(robot.get_eef_pose());
+      CartesianTwist twist = ds->evaluate(robot.get_eef_pose());
       twist.clamp(1.5, 0.5);
-      JointTorques command = ctrl.compute_command(twist, eef_pose, robot.get_jacobian());
+      JointTorques command = ctrl->compute_command(twist, eef_pose, robot.get_jacobian());
       publish(robot.publisher, command);
       rate.sleep();
     }
