@@ -30,7 +30,7 @@ If working with Docker, build and run the image with
 
 ```console
 ./build-server.sh
-aica-docker interactive control-libraries-ros-demos:galactic -u ros2 --net bridge
+aica-docker interactive control-libraries-ros-demos:galactic-devel -u ros2 --net bridge
 ```
 
 Running the cpp scripts uses ROS2 commands, e.g. to run a script:

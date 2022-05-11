@@ -4,8 +4,8 @@
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include <state_representation/space/cartesian/CartesianPose.hpp>
-#include <state_representation/robot/Jacobian.hpp>
-#include <state_representation/robot/JointState.hpp>
+#include <state_representation/space/Jacobian.hpp>
+#include <state_representation/space/joint/JointState.hpp>
 
 namespace ros_examples {
 
