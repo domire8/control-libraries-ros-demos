@@ -53,7 +53,7 @@ cd path/to/desired/location
 git clone -b develop git@github.com:epfl-lasa/simulator-backend.git
 cd simulator-backend/pybullet_zmq
 ./build-server.sh
-aica-docker interactive aica-technology/zmq-simulator -u ros --net host --no-hostname
+aica-docker interactive aica-technology/zmq-simulator -u ros2 --net host --no-hostname
 python3 pybullet_zmq/bin/zmq-simulator
 ```
 
