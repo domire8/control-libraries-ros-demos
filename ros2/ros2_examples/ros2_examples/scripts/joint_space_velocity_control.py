@@ -1,7 +1,7 @@
 import rclpy
 import state_representation as sr
 import std_msgs.msg
-from dynamical_systems import create_cartesian_ds, DYNAMICAL_SYSTEM
+from dynamical_systems import create_cartesian_ds, DYNAMICAL_SYSTEM_TYPE
 from ros2_examples.robot_interface_node import RobotInterfaceNode
 
 
@@ -14,9 +14,9 @@ class JointSpaceVelocityControl(RobotInterfaceNode):
         target = sr.CartesianPose(self.robot.get_frames()[-1], self.robot.get_frames()[0])
         target.set_position([0.6, -0.3, 0.5])
         target.set_orientation([0, 1, 0, 0])
-        self._ds = create_cartesian_ds(DYNAMICAL_SYSTEM.POINT_ATTRACTOR)
-        self._ds.set_parameter_value("attractor", target, sr.StateType.PARAMETER_CARTESIANPOSE)
-        self._ds.set_parameter_value("gain", [50, 50, 50, 10, 10, 10], sr.StateType.PARAMETER_DOUBLE_ARRAY)
+        self._ds = create_cartesian_ds(DYNAMICAL_SYSTEM_TYPE.POINT_ATTRACTOR)
+        self._ds.set_parameter_value("attractor", target, sr.ParameterType.STATE, sr.StateType.CARTESIAN_POSE)
+        self._ds.set_parameter_value("gain", [50, 50, 50, 10, 10, 10], sr.ParameterType.DOUBLE_ARRAY)
 
         self._timer = self.create_timer(dt, self.control_loop)
 
