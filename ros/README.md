@@ -69,6 +69,15 @@ roslaunch ros_examples demo.launch demo:=<demo> robot_name:=franka
 Note that the robot name has to be the same as specified in the simulator, otherwise the topics won't be in the same
 namespace and the demos don't work.
 
+## Running RViz simultaneously
+
+For the script `task_space_control_loop`, it can be nice to visualize the movement of the frames in RViz. To launch the
+script with RViz, do
+
+```console
+roslaunch ros_examples demo.launch demo:=task_space_control_loop start_rviz:=true
+```
+
 ## Development
 
 To run the Docker image as SSH server:

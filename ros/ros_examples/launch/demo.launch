@@ -1,9 +1,13 @@
 <launch>
     <arg name="demo" default="joint_space_velocity_control"/>
     <arg name="robot_name" default="franka"/>
+    <arg name="start_rviz" default="false"/>
 
     <group ns="$(arg robot_name)">
         <node type="$(arg demo)" name="$(arg demo)" pkg="ros_examples" output="screen"/>
+        <group if="$(arg start_rviz)">
+            <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ros_examples)/rviz/config_file.rviz"/>
+        </group>
     </group>
 
 </launch>
