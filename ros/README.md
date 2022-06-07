@@ -44,10 +44,12 @@ Available demos are:
 - cartesian_twist_control
 - joint_space_position_control
 - joint_space_velocity_control
+- task_space_control_loop (standalone node, does not require simulator)
 
 ## Running the simulator simultaneously
 
-The scripts require a simulator (or real robot with the same interface) to be running. Start the simulator with:
+All scripts except the `task_space_control_loop` require a simulator (or real robot with the same interface) to be
+running. Start the simulator with:
 
 ```console
 cd path/to/desired/location
@@ -66,6 +68,15 @@ roslaunch ros_examples demo.launch demo:=<demo> robot_name:=franka
 
 Note that the robot name has to be the same as specified in the simulator, otherwise the topics won't be in the same
 namespace and the demos don't work.
+
+## Running RViz simultaneously
+
+For the script `task_space_control_loop`, it can be nice to visualize the movement of the frames in RViz. To launch the
+script with RViz, do
+
+```console
+roslaunch ros_examples demo.launch demo:=task_space_control_loop start_rviz:=true
+```
 
 ## Development
 

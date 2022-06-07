@@ -19,6 +19,7 @@ find_package(catkin REQUIRED COMPONENTS
     roscpp
     std_msgs
     sensor_msgs
+    tf
 )
 
 list(APPEND CMAKE_PREFIX_PATH /opt/openrobots)
@@ -29,6 +30,7 @@ catkin_package(
     roscpp
     std_msgs
     sensor_msgs
+    tf
 )
 
 include_directories(
@@ -41,6 +43,7 @@ set(DEMOS_SCRIPTS
     cartesian_twist_control
     joint_space_position_control
     joint_space_velocity_control
+    task_space_control_loop
 )
 
 foreach(SCRIPT ${DEMOS_SCRIPTS})
