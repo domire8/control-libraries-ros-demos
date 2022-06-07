@@ -44,6 +44,7 @@ Available demos are:
 - cartesian_twist_control
 - joint_space_position_control
 - joint_space_velocity_control
+- task_space_control_loop (standalone node, does not require simulator)
 
 
 Running the python scripts uses ROS2 commands, e.g. to run a script:
@@ -58,7 +59,8 @@ Available demos are:
 
 ## Running the simulator simultaneously
 
-The scripts require a simulator (or real robot with the same interface) to be running. Start the simulator with:
+All scripts except the `task_space_control_loop` require a simulator (or real robot with the same interface) to be 
+running. Start the simulator with:
 
 ```console
 cd path/to/desired/location

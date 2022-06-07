@@ -30,6 +30,7 @@ set(DEMOS_SCRIPTS
     cartesian_twist_control
     joint_space_position_control
     joint_space_velocity_control
+    task_space_control_loop
 )
 
 foreach(SCRIPT ${DEMOS_SCRIPTS})
