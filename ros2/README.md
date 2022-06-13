@@ -30,7 +30,7 @@ If working with Docker, build and run the image with
 
 ```console
 ./build-server.sh
-aica-docker interactive control-libraries-ros-demos:galactic-devel -u ros2 --net bridge
+aica-docker interactive control-libraries-ros2-demos:galactic -u ros2 --net bridge
 ```
 
 Running the cpp scripts uses ROS2 commands, e.g. to run a script:
@@ -94,5 +94,5 @@ ros2 launch ros2_examples demo.launch.py demo:=task_space_control_loop start_rvi
 To run the Docker image as SSH server:
 
 ```console
-aica-docker server control-libraries-ros-demos:galactic -u ros2 -p 2260 --net bridge
+aica-docker server control-libraries-ros2-demos:galactic -u ros2 -p 2260 --net bridge
 ```

@@ -1,7 +1,7 @@
 #!/bin/bash
-BASE_IMAGE_TAG=galactic-devel
+BASE_IMAGE_TAG=galactic
 
-IMAGE_NAME=control-libraries-ros-demos
+IMAGE_NAME=control-libraries-ros2-demos
 
 SERVE_REMOTE=false
 REMOTE_SSH_PORT=2260
