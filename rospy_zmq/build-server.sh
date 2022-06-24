@@ -1,5 +1,5 @@
 #!/bin/bash
-BASE_IMAGE_TAG=noetic-develop
+BASE_IMAGE_TAG=noetic
 
 IMAGE_NAME=control-libraries-rospy-zmq-demos
 
