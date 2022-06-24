@@ -16,7 +16,7 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 list(APPEND CMAKE_PREFIX_PATH /opt/openrobots)
-find_package(control_libraries 5.2 REQUIRED)
+find_package(control_libraries 6.0 REQUIRED)
 
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()

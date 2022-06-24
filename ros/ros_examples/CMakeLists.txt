@@ -23,7 +23,7 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 list(APPEND CMAKE_PREFIX_PATH /opt/openrobots)
-find_package(control_libraries 5.2 REQUIRED)
+find_package(control_libraries 6.0 REQUIRED)
 
 catkin_package(
     CATKIN_DEPENDS

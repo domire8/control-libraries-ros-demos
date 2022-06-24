@@ -30,7 +30,7 @@ If working with Docker, build and run the image with
 
 ```console
 ./build-server.sh
-aica-docker interactive control-libraries-rospy-zmq-demos:noetic-develop -u ros --net host --no-hostname
+aica-docker interactive control-libraries-rospy-zmq-demos:noetic -u ros --net host --no-hostname
 ```
 
 Running the scripts uses ROS commands, e.g. to run a script:
